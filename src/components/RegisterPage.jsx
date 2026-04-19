@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import API from "../api"; // ✅ Import your axios instance
+import API from "../api";
 import "./login.css";
+
 const isPasswordValid = (password) => {
   return (
     password.length >= 4 &&
@@ -19,16 +20,16 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // ✅ Handle register with backend
   const handleRegister = async (e) => {
     e.preventDefault();
-    
-  if (!isPasswordValid(password)) {
-    setError(
-      "Password must be at least 4 characters and include uppercase, lowercase, number, and special character"
-    );
-    return;
-  }
+
+    if (!isPasswordValid(password)) {
+      setError(
+        "Password must be at least 4 characters and include uppercase, lowercase, number, and special character"
+      );
+      return;
+    }
+
     try {
       const response = await API.post("/auth/register", {
         username: name,
@@ -36,87 +37,91 @@ const RegisterPage = () => {
         password,
       });
       if (response.status === 201) {
-        //alert("Registered successfully!");
-        navigate("/"); // redirect after success
+        navigate("/"); // redirect to login after registration
       }
     } catch (err) {
-      console.error("Registration error:", err);
-      setError(
-        err.response?.data?.message || "Registration failed. Try again!"
-      );
+      setError(err.response?.data?.message || "Registration failed. Try again!");
     }
   };
 
   return (
     <div className="login-container">
-      {/* Left Section - Illustration */}
+      {/* LEFT IMAGE */}
       <div className="left-section">
         <img
-          src="/Frame_228.png" // Ensure this image is in the public folder
+          src="/Frame_228.png"
           alt="Register Illustration"
           className="illustration"
+          style={{ marginLeft: "20px" }} // slightly move image right
         />
       </div>
 
-      {/* Right Section - Register Form */}
+      {/* RIGHT FORM */}
       <div className="right-section">
         <div className="form-container">
           <h2 className="form-title">Register</h2>
-
           <form onSubmit={handleRegister}>
-            {/* Name Field */}
+            {/* Name */}
             <div className="input-group">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="register-name">Name</label>
               <input
-                id="name"
+                id="register-name"
+                name="name"
                 type="text"
                 placeholder="Enter your name"
                 className="input-box"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
+                autoComplete="name"
               />
             </div>
 
-            {/* Email Field */}
+            {/* Email */}
             <div className="input-group">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="register-email">Email</label>
               <input
-                id="email"
+                id="register-email"
+                name="email"
                 type="email"
                 placeholder="Enter your email"
                 className="input-box"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                autoComplete="email"
               />
             </div>
 
-            {/* Password Field */}
+            {/* Password */}
             <div className="input-group">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="register-password">Password</label>
               <input
-                id="password"
+                id="register-password"
+                name="password"
                 type="password"
                 placeholder="Enter your password"
                 className="input-box"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                autoComplete="new-password"
               />
               <p style={{ fontSize: "0.8rem", color: "#ddd" }}>
-                Password must contain uppercase, lowercase, number, special character (min 4)
+                Password must contain uppercase, lowercase, number, special
+                character (min 4)
               </p>
             </div>
-            {/* Error Message */}
-            {error && <p style={{ color: "red" }}>{error}</p>}
+
+            {/* Error */}
+            {error && <p className="error-text">{error}</p>}
 
             {/* Register Button */}
             <button className="login-btn" type="submit">
               Register
             </button>
 
-            {/* Navigate to Login */}
+            {/* Login Link */}
             <p className="register-text">
               Already have an account?{" "}
               <Link to="/" className="register-link">

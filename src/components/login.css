@@ -4,7 +4,6 @@
   height: 100vh;
   width: 100%;
   font-family: Arial, sans-serif;
-  background: url("../assests/background.jpg") no-repeat center center/cover;
 }
 
 /* ===== Left Section ===== */
@@ -13,15 +12,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 6%; /* shifted slightly right */
 }
 
 /* ===== Illustration ===== */
 .illustration {
-  max-width: 75%;
+  width: 80%;
+  max-width: 500px;
   height: auto;
   object-fit: contain;
-  position: relative;
 }
 
 /* ===== Right Section ===== */
@@ -30,6 +28,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-right: 5%;
 }
 
 /* ===== Form Container ===== */
@@ -45,6 +44,7 @@
   font-weight: bold;
   margin-bottom: 1.8rem;
   text-align: center;
+  color: white;
 }
 
 /* ===== Input Fields ===== */
@@ -110,8 +110,8 @@
   color: white;
 }
 
-.register-link {
-  color: white;
+.register-text a {
+  color: #ffffff;
   text-decoration: underline;
 }
 
@@ -130,7 +130,6 @@
 
   .left-section {
     height: 40%;
-    padding-left: 0;
   }
 
   .right-section {

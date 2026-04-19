@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./login.css";
 import API from "../api";
+import "./login.css";
+import bg from "../assets/background.jpg";
 
-const Login = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,54 +33,47 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      {/* LEFT IMAGE SECTION */}
+    <div
+      className="login-container"
+      style={{
+        backgroundImage: `url(${bg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* LEFT */}
       <div className="left-section">
-        <img
-          src="/Frame_227.png"
-          alt="Login Illustration"
-          className="illustration"
-        />
+        <img src="/Frame_227.png" alt="Login" className="illustration" />
       </div>
 
-      {/* RIGHT FORM SECTION */}
+      {/* RIGHT */}
       <div className="right-section">
         <div className="form-container">
-          <h2 className="form-title">Login</h2>
+          <h2 className="form-title">Plan Your Trip</h2>
+
           <form onSubmit={handleLogin}>
-            {/* Email Field */}
             <div className="input-group">
-              <label htmlFor="login-email">Email</label>
+              <label>Email</label>
               <input
-                id="login-email"
-                name="email"
                 type="email"
-                placeholder="Enter your email"
                 className="input-box"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                autoComplete="email"
               />
             </div>
 
-            {/* Password Field */}
             <div className="input-group">
-              <label htmlFor="login-password">Password</label>
+              <label>Password</label>
               <input
-                id="login-password"
-                name="password"
                 type="password"
-                placeholder="Enter your password"
                 className="input-box"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                autoComplete="current-password"
               />
             </div>
 
-            {/* Forgot Password */}
             <div className="forgot-link">
               <button
                 type="button"
@@ -90,20 +84,12 @@ const Login = () => {
               </button>
             </div>
 
-            {/* Error */}
             {error && <p className="error-text">{error}</p>}
 
-            {/* Login Button */}
-            <button className="login-btn" type="submit">
-              Login
-            </button>
+            <button className="login-btn">Login</button>
 
-            {/* Register Link */}
             <p className="register-text">
-              Don’t have an account?{" "}
-              <Link to="/register" className="register-link">
-                Register now
-              </Link>
+              Don’t have an account? <Link to="/register">Register</Link>
             </p>
           </form>
         </div>
@@ -112,4 +98,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;
